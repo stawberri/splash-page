@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Splash Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <style>
+    html {
+      height: 100%;
+      background: center center no-repeat / cover;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    (function () {
+      const preloader = document.createElement('img')
+      preloader.onload = () => {
+        const { style } = document.documentElement
+        style.backgroundImage = `url(${preloader.src})`
+      }
+
+      function getSplash() {
+        const { innerHeight: height, innerWidth: width } = window
+        preloader.src = `https://source.unsplash.com/random/${width}x${height}`
+      }
+
+      getSplash()
+
+      let timeout
+      window.addEventListener('resize', () => {
+        clearTimeout(timeout)
+        timeout = setTimeout(getSplash, 100)
+      })
+    })()
+  </script>
+</body>
+
+</html>
